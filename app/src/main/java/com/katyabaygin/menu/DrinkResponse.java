@@ -17,7 +17,7 @@ public class DrinkResponse {
         super();
         this.drinks = drinks;
     }
-
+@NonNull
     public List<Drink> getDrinks() {
         return drinks;
     }
@@ -26,22 +26,11 @@ public class DrinkResponse {
         this.drinks = drinks;
     }
 
-    @NonNull
     @Override
+    @NonNull
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DrinkResponse.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("drinks");
-        sb.append('=');
-        sb.append(((this.drinks == null) ? "<null>" : this.drinks));
-        sb.append(',');
-        if (sb.charAt((sb.length() - 1)) == ',') {
-            sb.setCharAt((sb.length() - 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return "DrinkResponse{" +
+                "drinks=" + drinks +
+                '}';
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.katyabaygin.menu;
 
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
@@ -16,19 +17,18 @@ public class Drink implements Serializable {
     private int idDrink;
     @SerializedName("strDrink")
     private String strDrink;
-    @SerializedName("strDrinkThumb")
+
+   @SerializedName("strDrinkThumb")
     private String strDrinkThumb;
     @SerializedName("drinkNote")
     private String drinkNote;
 
-    public Drink(Integer idDrink, String drinkNote) {
+    public Drink(int idDrink, String strDrink, String strDrinkThumb, String drinkNote) {
         this.idDrink = idDrink;
         this.strDrink = strDrink;
         this.strDrinkThumb = strDrinkThumb;
         this.drinkNote = drinkNote;
-
     }
-
 
     public int getIdDrink() {
         return idDrink;

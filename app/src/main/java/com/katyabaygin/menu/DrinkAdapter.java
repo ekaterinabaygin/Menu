@@ -36,7 +36,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
 
     @NonNull
     @Override
-    public DrinkAdapter.DrinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DrinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.drink_item,
                 parent,
@@ -47,7 +47,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
 
 
     @Override
-    public void onBindViewHolder(@NonNull DrinkAdapter.DrinkViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DrinkViewHolder holder, int position) {
 
         Drink drink = drinks.get(position);
         Glide.with(holder.itemView)
@@ -73,6 +73,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
     public int getItemCount() {
         return drinks.size();
     }
+
+
 
     interface OnReachEndListener {
         void onReachEnd();

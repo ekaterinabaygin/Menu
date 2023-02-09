@@ -24,8 +24,9 @@ public interface DrinkDao {
     @Delete
     void delete(Drink drink);
 
-    @Query("SELECT * FROM drinks")
-    List<Drink> getAllDrinks();
+    @Update
+    void updateDrink(Drink drink);
+
 
     @Query("SELECT * FROM drinks WHERE idDrink = :id")
     Drink getDrinkById(int id);
@@ -33,9 +34,6 @@ public interface DrinkDao {
 
     @Query("SELECT * FROM drinks")
     LiveData<List<Drink>> getAllDrinksLiveData();
-
-
-
 
 
 }
