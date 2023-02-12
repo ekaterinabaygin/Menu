@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-
 public class DrinkDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_DRINK = "drinks";
@@ -24,17 +23,18 @@ public class DrinkDetailActivity extends AppCompatActivity {
     private EditText textViewNotes;
     private Button button;
     private DrinkDataBase drinkDataBase;
+    private DrinkDao drinkDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_detail);
-        button = findViewById(R.id.button);
         initViews();
 
         drinkDataBase = DrinkDataBase.getInstance(getApplication());
+        drinkDao = drinkDataBase.drinkDao();
 
-        Drink drink = (Drink) getIntent().getSerializableExtra(EXTRA_DRINK);
+        final Drink drink = (Drink) getIntent().getSerializableExtra(EXTRA_DRINK);
 
         if (drink != null) {
             Glide.with(this)
@@ -42,13 +42,17 @@ public class DrinkDetailActivity extends AppCompatActivity {
                     .into(imageViewDrinkDetail);
             textViewDrinkDetail.setText(drink.getStrDrink());
             textViewNotes.setText(drink.getDrinkNote());
-            textViewNotes.setHint("Add your note here)");
+            textViewNotes.setHint("Add your note here");
         }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DrinkDetailActivity.this, MyOrdersActivity.class);
+                assert drink != null;
+                drink.setDrinkNote(textViewNotes.getText().toString());
+                new InsertDrinkAsyncTask(drinkDao).execute(drink);
+                intent.putExtra(EXTRA_DRINK, drink);
                 startActivity(intent);
                 showToast(view);
             }
@@ -61,26 +65,23 @@ public class DrinkDetailActivity extends AppCompatActivity {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
-
-    public void OnClickOrder(View view) {
-        String notes = textViewNotes.getText().toString();
-    }
-
     private void initViews() {
-
         imageViewDrinkDetail = findViewById(R.id.imageViewDrinkDetail);
         textViewDrinkDetail = findViewById(R.id.textViewDrinkDetail);
         textViewNotes = findViewById(R.id.textViewNotes);
         button = findViewById(R.id.button);
     }
 
-    public static Intent newIntent(Context context, Drink drink) {
+    public static Intent newIntent(Context context, Drink drink){
         Intent intent = new Intent(context, DrinkDetailActivity.class);
         intent.putExtra(EXTRA_DRINK, drink);
         return intent;
     }
 
-
-
-    }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (drinkDataBase != null) {
+            drinkDataBase.close();
+        }
+    }}

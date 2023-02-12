@@ -23,11 +23,14 @@ public class MyOrdersActivity extends AppCompatActivity {
         drinkAdapter = new DrinkAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(drinkAdapter);
+
     }
 
-    public static Intent newIntent(Context context, Drink drink) {
-        Intent intent = new Intent(context, MyOrdersActivity.class);
-        return intent;
-    }
+
+
+
+
+    int drink = (Integer)getIntent().getExtras().get(EXTRA_DRINK);
+
 
 }

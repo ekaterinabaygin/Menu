@@ -39,43 +39,39 @@ public class MainActivity extends AppCompatActivity {
         drinkAdapter = new DrinkAdapter();
         recyclerViewDrinks.setAdapter(drinkAdapter);
         recyclerViewDrinks.setLayoutManager(new GridLayoutManager(this, 2));
+
+        setupViewModel();
+        setupRecyclerView();
+    }
+
+    private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.getDrinks().observe(this, drinks -> {
+            if (drinks != null) {
+                drinkAdapter.setDrinks(drinks);
+                progressBarLoading.setVisibility(View.GONE);
+            }
+        });
+
+        progressBarLoading.setVisibility(View.VISIBLE);
+        viewModel.loadDrinks();
+    }
+
+    private void setupRecyclerView() {
+        recyclerViewDrinks = findViewById(R.id.recyclerViewDrinks);
+        drinkAdapter = new DrinkAdapter();
+        recyclerViewDrinks.setAdapter(drinkAdapter);
+        recyclerViewDrinks.setLayoutManager(new GridLayoutManager(this, 2));
+
         viewModel.getDrinks().observe(this, new Observer<List<Drink>>() {
             @Override
             public void onChanged(List<Drink> drinks) {
                 drinkAdapter.setDrinks(drinks);
+                progressBarLoading.setVisibility(View.GONE);
             }
         });
-        viewModel.loadDrinks();
-        viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean isLoading) {
-                if (isLoading) {
+    }}
 
-                    progressBarLoading.setVisibility(View.VISIBLE);
-                } else {
-                    progressBarLoading.setVisibility(View.GONE);
-
-                }
-            }
-        });
-        drinkAdapter.setOnReachEndListener(new DrinkAdapter.OnReachEndListener() {
-            @Override
-            public void onReachEnd() {
-                viewModel.loadDrinks();
-            }
-        });
-
-        drinkAdapter.setOnDrinkClickListener(new DrinkAdapter.OnDrinkClickListener() {
-            @Override
-            public void onDrinkClick(Drink drink) {
-                Intent intent = DrinkDetailActivity.newIntent(MainActivity.this, drink);
-                startActivity(intent);
-            }
-        });
-
-    }
-}
 
 
 

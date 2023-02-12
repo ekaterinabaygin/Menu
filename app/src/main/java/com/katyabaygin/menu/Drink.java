@@ -13,14 +13,18 @@ import java.io.Serializable;
 public class Drink implements Serializable {
 
     @PrimaryKey
+    @NonNull
     @SerializedName("idDrink")
     private int idDrink;
     @SerializedName("strDrink")
+    @NonNull
     private String strDrink;
 
    @SerializedName("strDrinkThumb")
+   @NonNull
     private String strDrinkThumb;
     @SerializedName("drinkNote")
+    @NonNull
     private String drinkNote;
 
     public Drink(int idDrink, String strDrink, String strDrinkThumb, String drinkNote) {

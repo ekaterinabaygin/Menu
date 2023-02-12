@@ -15,12 +15,6 @@ public interface DrinkDao {
     @Insert
     void insert(Drink drink);
 
-    @Update
-    void update(Drink drink);
-
-    @Update
-    void saveOrder(Drink drink);
-
     @Delete
     void delete(Drink drink);
 

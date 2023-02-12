@@ -67,14 +67,10 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
             }
         });
     }
-
-
     @Override
     public int getItemCount() {
         return drinks.size();
     }
-
-
 
     interface OnReachEndListener {
         void onReachEnd();
