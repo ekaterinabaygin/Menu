@@ -5,7 +5,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ApiFactory {
+public class  ApiFactory {
 
     private static final String BASE_URL = "https://www.thecocktaildb.com/";
 

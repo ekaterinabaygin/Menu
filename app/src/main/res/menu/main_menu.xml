@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/IdMyOrder"
-        android:title="@string/My_Order" />
+        android:id="@+id/menu_my_orders"
+        android:title="@string/my_orders"
+       />
 </menu>

@@ -17,6 +17,9 @@ import com.bumptech.glide.Glide;
 public class DrinkDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_DRINK = "drinks";
+    public static final String ORDERED_DRINK = "ordered";
+    public static final String NOTES = "notes";
+
 
     private ImageView imageViewDrinkDetail;
     private TextView textViewDrinkDetail;
@@ -30,11 +33,11 @@ public class DrinkDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_detail);
         initViews();
+        Drink drink = (Drink) getIntent().getSerializableExtra(EXTRA_DRINK);
+
 
         drinkDataBase = DrinkDataBase.getInstance(getApplication());
         drinkDao = drinkDataBase.drinkDao();
-
-        final Drink drink = (Drink) getIntent().getSerializableExtra(EXTRA_DRINK);
 
         if (drink != null) {
             Glide.with(this)
@@ -49,10 +52,9 @@ public class DrinkDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DrinkDetailActivity.this, MyOrdersActivity.class);
-                assert drink != null;
                 drink.setDrinkNote(textViewNotes.getText().toString());
-                new InsertDrinkAsyncTask(drinkDao).execute(drink);
-                intent.putExtra(EXTRA_DRINK, drink);
+                intent.putExtra(ORDERED_DRINK, drink);
+                intent.putExtra(NOTES, textViewNotes.getText().toString());
                 startActivity(intent);
                 showToast(view);
             }

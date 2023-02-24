@@ -27,11 +27,11 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Drink>> getDrinks()    {
+    public LiveData<List<Drink>> getDrinks() {
         return drinks;
     }
 
-    public LiveData<Boolean> getIsLoading()  {
+    public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
 

@@ -4,10 +4,11 @@
     <string name="apikey">\"api-key: \"</string>
     <string name="order">order</string>
     <string name="thank_you_for_your_order">Thank you for your order!</string>
-    <string name="orderedIten_">My_orders</string>
+    <string name="orderedItem">My_orders</string>
     <string name="ordered_Item">MyOrders</string>
     <string name="OrderedItem">Ordered_Item</string>
     <string name="OrderedItemList">My_Order</string>
     <string name="My_Order">My_Order</string>
+    <string name="my_orders">My Orders</string>
 
 </resources>
