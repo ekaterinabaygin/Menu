@@ -42,7 +42,17 @@ public class MyOrdersActivity extends AppCompatActivity {
         } else {
             textViewOrderedDrink.setText("No drink ordered.");
         }
+
+//        public LiveData<Integer> getOrderedDrinksCount() {
+//            return getOrderedDrinksCount();
+//        }
+
     }
+
+//
+//    public static LiveData<Integer> getOrderedDrinksCount() {
+//        return MyOrdersActivity.getOrderedDrinksCount();
+//    }
 
     public void returnToMainScreen(View view) {
         Intent intent = new Intent(this, MainActivity.class);

@@ -10,5 +10,13 @@
     <string name="OrderedItemList">My_Order</string>
     <string name="My_Order">My_Order</string>
     <string name="my_orders">My Orders</string>
+    <string name="your_email">Your email</string>
+    <string name="your_password">Your password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="register">Register</string>
+    <string name="your_name">Your name</string>
+    <string name="menu">Menu</string>
+    <string name="sign_out">Sign out</string>
 
 </resources>

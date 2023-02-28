@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926952897051",
+    "project_id": "menu-432cf",
+    "storage_bucket": "menu-432cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926952897051:android:fcbcc0fc09a6b04d1896be",
+        "android_client_info": {
+          "package_name": "com.katyabaygin.menu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926952897051-9ob62osmo40a9d6viqaasqnmlvvcrfhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1U2_Kp8Vto97bDvFll7paAAx4WzXBce4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926952897051-9ob62osmo40a9d6viqaasqnmlvvcrfhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

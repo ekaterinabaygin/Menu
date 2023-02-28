@@ -68,5 +68,15 @@ public class MainViewModel extends AndroidViewModel {
         super.onCleared();
         compositeDisposable.dispose();
     }
+
+    private LiveData<Integer> orderedDrinksCount;
+
+    public LiveData<Integer> getOrderedDrinksCount() {
+        if (orderedDrinksCount == null) {
+            orderedDrinksCount = getOrderedDrinksCount();
+        }
+        return orderedDrinksCount;
+    }
+
 }
 
