@@ -2,6 +2,7 @@ package com.katyabaygin.menu;
 
 import android.app.Application;
 
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -24,7 +25,6 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
         loadDrinks();
-
     }
 
     public LiveData<List<Drink>> getDrinks() {
@@ -43,24 +43,20 @@ public class MainViewModel extends AndroidViewModel {
         Disposable disposable = ApiFactory.apiService.loadDrinks()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable1 -> isLoading.setValue(true))
-                .doAfterTerminate(() -> isLoading.setValue(false))
-                .subscribe(DrinkResponse -> {
+                .doOnSubscribe(disposable1 -> isLoading.postValue(true))
+                .doAfterTerminate(() -> isLoading.postValue(false))
+                .subscribe(drinkResponse -> {
                     List<Drink> loadedDrinks = drinks.getValue();
                     if (loadedDrinks != null) {
-                        loadedDrinks.addAll(DrinkResponse.getDrinks());
-                        drinks.setValue(loadedDrinks);
+                        loadedDrinks.addAll(drinkResponse.getDrinks());
+                        drinks.postValue(loadedDrinks);
                     } else {
-                        drinks.setValue(DrinkResponse.getDrinks());
-
+                        drinks.postValue(drinkResponse.getDrinks());
                     }
                 }, throwable -> {
-
-
+                    // handle error
                 });
-
         compositeDisposable.add(disposable);
-
     }
 
     @Override
@@ -68,15 +64,7 @@ public class MainViewModel extends AndroidViewModel {
         super.onCleared();
         compositeDisposable.dispose();
     }
-
-    private LiveData<Integer> orderedDrinksCount;
-
-    public LiveData<Integer> getOrderedDrinksCount() {
-        if (orderedDrinksCount == null) {
-            orderedDrinksCount = getOrderedDrinksCount();
-        }
-        return orderedDrinksCount;
-    }
-
 }
+
+
 

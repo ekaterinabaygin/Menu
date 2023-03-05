@@ -1,13 +1,13 @@
 package com.katyabaygin.menu;
 
 import static com.katyabaygin.menu.DrinkDetailActivity.NOTES;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.bumptech.glide.Glide;
 
@@ -33,7 +33,6 @@ public class MyOrdersActivity extends AppCompatActivity {
         }
 
 
-
         Drink orderedDrink = (Drink) getIntent().getSerializableExtra(DrinkDetailActivity.ORDERED_DRINK);
 
         if (orderedDrink != null) {
@@ -43,21 +42,14 @@ public class MyOrdersActivity extends AppCompatActivity {
             textViewOrderedDrink.setText("No drink ordered.");
         }
 
-//        public LiveData<Integer> getOrderedDrinksCount() {
-//            return getOrderedDrinksCount();
-//        }
 
     }
-
-//
-//    public static LiveData<Integer> getOrderedDrinksCount() {
-//        return MyOrdersActivity.getOrderedDrinksCount();
-//    }
 
     public void returnToMainScreen(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 
 }
 

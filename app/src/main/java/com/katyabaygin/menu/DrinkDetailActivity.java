@@ -34,8 +34,6 @@ public class DrinkDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drink_detail);
         initViews();
         Drink drink = (Drink) getIntent().getSerializableExtra(EXTRA_DRINK);
-
-
         drinkDataBase = DrinkDataBase.getInstance(getApplication());
         drinkDao = drinkDataBase.drinkDao();
 
@@ -52,6 +50,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DrinkDetailActivity.this, MyOrdersActivity.class);
+                assert drink != null;
                 drink.setDrinkNote(textViewNotes.getText().toString());
                 intent.putExtra(ORDERED_DRINK, drink);
                 intent.putExtra(NOTES, textViewNotes.getText().toString());
@@ -78,12 +77,12 @@ public class DrinkDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(context, DrinkDetailActivity.class);
         intent.putExtra(EXTRA_DRINK, drink);
         return intent;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (drinkDataBase != null) {
-            drinkDataBase.close();
-        }
     }}
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if (drinkDataBase != null) {
+//            drinkDataBase.close();
+//        }
+//    }}

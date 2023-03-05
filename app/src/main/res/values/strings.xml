@@ -18,5 +18,10 @@
     <string name="your_name">Your name</string>
     <string name="menu">Menu</string>
     <string name="sign_out">Sign out</string>
+    <string name="my_orders_with_count">My orders with count</string>
+    <string name="return_to_main_screen">Return to main screen</string>
+    <string name="my_order">My Orders</string>
+    <string name="choose_your_drink">Choose your drink</string>
+    <string name="drink_name">Drink Name</string>
 
 </resources>

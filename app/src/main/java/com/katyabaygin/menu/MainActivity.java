@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -21,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewDrinks;
     private DrinkAdapter drinkAdapter;
     private ProgressBar progressBarLoading;
+    public static final String EXTRA_DRINK = "drinks";
+    private TextView textViewDrinkDetail;
+
+
+
 
     private FirebaseAuth auth;
 
@@ -31,11 +41,15 @@ public class MainActivity extends AppCompatActivity {
         progressBarLoading = findViewById(R.id.progressBarLoading);
         recyclerViewDrinks = findViewById(R.id.recyclerViewDrinks);
         drinkAdapter = new DrinkAdapter();
+        initViews();
+
+
+
+
         recyclerViewDrinks.setAdapter(drinkAdapter);
         recyclerViewDrinks.setLayoutManager(new GridLayoutManager(this, 2));
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         auth = FirebaseAuth.getInstance();
-
 
         viewModel.getDrinks().observe(this, new Observer<List<Drink>>() {
             @Override
@@ -56,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         drinkAdapter.setOnReachEndListener(new DrinkAdapter.OnReachEndListener() {
             @Override
             public void onReachEnd() {
@@ -71,28 +86,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void initViews() {
+        textViewDrinkDetail = findViewById(R.id.textViewDrinkDetail);
+    }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        MenuItem myOrdersMenuItem = menu.findItem(R.id.menu_my_orders);
-//        viewModel.getOrderedDrinksCount().observe(this, new Observer<Integer>() {
-//            @Override
-//            public void onChanged(Integer count) {
-//                if (count > 0) {
-//                    myOrdersMenuItem.setTitle(getString(R.string.my_orders_with_count, count));
-//                } else {
-//                    myOrdersMenuItem.setTitle(getString(R.string.my_orders));
-//                }
-//            }
-//        });
-//        return true;
-//    }
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Intent intent = new Intent(MainActivity.this, MyOrdersActivity.class);
-//        startActivity(intent);
-//        return true;
-//    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem myOrdersMenuItem = menu.findItem(R.id.menu_my_orders);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_my_orders) {
+            Intent intent = new Intent(this, MyOrdersActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

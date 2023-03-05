@@ -18,9 +18,21 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars"
             android:adjustViewBounds="true"
-            android:contentDescription="@null"
+            android:contentDescription="@null"/>
 
-            />
+        <TextView
+            android:id="@+id/textViewDrinkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/drink_name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDrink"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
