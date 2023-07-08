@@ -38,6 +38,9 @@ dependencies {
         compose_version = '1.0.0-beta07'
     }
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1.'
+
+
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 

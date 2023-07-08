@@ -15,7 +15,7 @@ object ApiFactory {
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
-    private val apiService: ApiService = retrofit.create(ApiService::class.java)
+    val apiService: ApiService = retrofit.create(ApiService::class.java)
 
     private var database: DrinkDataBase? = null
 

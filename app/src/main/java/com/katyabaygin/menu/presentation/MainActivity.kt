@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    public lateinit var viewModel: MainViewModel
+    lateinit var viewModel: MainViewModel
     private lateinit var recyclerViewDrinks: RecyclerView
     private lateinit var drinkAdapter: DrinkAdapter
     private lateinit var progressBarLoading: ProgressBar
@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         progressBarLoading = findViewById(R.id.progressBarLoading)
         recyclerViewDrinks = findViewById(R.id.recyclerViewDrinks)
         drinkAdapter = DrinkAdapter()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
 
         recyclerViewDrinks.adapter = drinkAdapter
         recyclerViewDrinks.layoutManager = GridLayoutManager(this, 2)

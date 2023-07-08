@@ -9,16 +9,17 @@ import com.katyabaygin.menu.data.ApiFactory
 import com.katyabaygin.menu.domain.Drink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val drinkRepository = ApiFactory.getDrinkRepository(application)
-
     private val _drinks = MutableLiveData<List<Drink>>()
-    val drinks: LiveData<List<Drink>> get() = _drinks
+    val drinks: LiveData<List<Drink>>
+        get() = _drinks
 
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     fun loadDrinks() {
         val loading = _isLoading.value
@@ -26,16 +27,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
 
-        viewModelScope.launch(Dispatchers.IO) {
-            _isLoading.postValue(true)
+        _isLoading.value = true
 
+        viewModelScope.launch {
             try {
-                val loadedDrinks = drinkRepository.getDrinks()
-                _drinks.postValue(loadedDrinks.value)
-            } catch (_: Exception) {
+                val response = withContext(Dispatchers.IO) {
+                    ApiFactory.apiService.loadDrinks()
+                }
+                val loadedDrinks = _drinks.value?.toMutableList()
+                if (loadedDrinks != null) {
+                    loadedDrinks.addAll(response.toMutableList())
+                    _drinks.postValue(loadedDrinks)
+                } else {
+                    _drinks.postValue(response.toMutableList())
+                }
+            } catch (e: Exception) {
+                // Handle the exception
+            } finally {
+                _isLoading.value = false
             }
-
-            _isLoading.postValue(false)
         }
     }
 }
